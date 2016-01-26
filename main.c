@@ -31,6 +31,14 @@ int main ( void )
 			token = strtok(NULL, delimiter);
 		}
 		theArgs[counter] = NULL;
+
+		if(theArgs[0] == "pwd")
+		{
+			char theDirectory[100];
+			getcwd(theDirectory, 100);
+			printf("%s", theDirectory);
+		}
+
 		int childpid = fork();
 		if(childpid == 0)
 		{
