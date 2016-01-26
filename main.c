@@ -39,6 +39,11 @@ int main ( void )
 			printf("%s", theDirectory);
 		}
 
+		if(strcmp(theArgs[0], "cd"))
+		{
+			chdir(theArgs[1]);
+		}
+
 		int childpid = fork();
 		if(childpid == 0)
 		{
