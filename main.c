@@ -11,7 +11,8 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#define ARGSLEN		10
+#define ARGSLEN		100
+
 
 int main ( void )
 {
@@ -41,7 +42,20 @@ int main ( void )
 
 		if(strcmp(theArgs[0], "cd"))
 		{
-			chdir(theArgs[1]);
+			if(theArgs[1] == NULL)
+			{
+				printf("No directory given")
+			}
+			else
+			{
+				char theDirectory[100];
+				getcwd(theDirectory, 100);
+				int returnVal = chdir(strcat(theDirectory, theArgs[1]));
+				if(returnVal == -1)
+				{
+					printf("Error changing directory");
+				}
+			}
 		}
 
 		int childpid = fork();
