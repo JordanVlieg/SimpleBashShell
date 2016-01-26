@@ -32,7 +32,7 @@ int main ( void )
 		}
 		theArgs[counter] = NULL;
 
-		if(theArgs[0] == "pwd")
+		if(strcmp(theArgs[0], "pwd") != 0)
 		{
 			char theDirectory[100];
 			getcwd(theDirectory, 100);
