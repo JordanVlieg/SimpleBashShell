@@ -51,7 +51,9 @@ int main ( void )
 			{
 				char theDirectory[100];
 				getcwd(theDirectory, 100);
-				int returnVal = chdir(strcat(theDirectory, theArgs[1]));
+				strcat(theDirectory, "/");
+				strcat(theDirectory, theArgs[1]);
+				int returnVal = chdir(theDirectory);
 				if(returnVal == -1)
 				{
 					printf("Error changing directory\n");
