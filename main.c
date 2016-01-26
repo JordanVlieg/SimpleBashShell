@@ -33,18 +33,19 @@ int main ( void )
 		}
 		theArgs[counter] = NULL;
 
-		if(strcmp(theArgs[0], "pwd") != 0)
+		if(strcmp(theArgs[0], "pwd") == 0)
 		{
 			char theDirectory[100];
 			getcwd(theDirectory, 100);
-			printf("%s", theDirectory);
+			printf("Printed by me: %s\n", theDirectory);
 		}
 
-		if(strcmp(theArgs[0], "cd"))
+		if(strcmp(theArgs[0], "cd") == 0)
 		{
+			printf("REACHED THE GODDAMN FUNCTION \n");
 			if(theArgs[1] == NULL)
 			{
-				printf("No directory given");
+				printf("No directory given\n");
 			}
 			else
 			{
@@ -53,7 +54,7 @@ int main ( void )
 				int returnVal = chdir(strcat(theDirectory, theArgs[1]));
 				if(returnVal == -1)
 				{
-					printf("Error changing directory");
+					printf("Error changing directory\n");
 				}
 			}
 		}
