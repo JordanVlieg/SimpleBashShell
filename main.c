@@ -40,7 +40,7 @@ int main ( void )
 			printf("Printed by me: %s\n", theDirectory);
 		}
 
-		if(strcmp(theArgs[0], "cd") == 0)
+		else if(strcmp(theArgs[0], "cd") == 0)
 		{
 			printf("REACHED THE GODDAMN FUNCTION \n");
 			if(theArgs[1] == NULL)
@@ -58,25 +58,27 @@ int main ( void )
 				}
 			}
 		}
-
-		int childpid = fork();
-		if(childpid == 0)
-		{
-			// This is the child thread
-			execvp(theArgs[0], theArgs);
-			exit(0);
-		}
-		else if(childpid == -1)
-		{
-			// Fork was unsuccessful
-			printf("Internal system error: Fork");
-			exit(0);
-		}
 		else
 		{
-			// This is the parent thread
-			wait(&waitStatus);
+			int childpid = fork();
+			if(childpid == 0)
+			{
+				// This is the child thread
+				execvp(theArgs[0], theArgs);
+				exit(0);
+			}
+			else if(childpid == -1)
+			{
+				// Fork was unsuccessful
+				printf("Internal system error: Fork");
+				exit(0);
+			}
+			else
+			{
+				// This is the parent thread
+				wait(&waitStatus);
+			}
+			free (cmd);
 		}
-		free (cmd);
 	}
 }
