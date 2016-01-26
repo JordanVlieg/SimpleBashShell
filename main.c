@@ -44,7 +44,7 @@ int main ( void )
 		{
 			if(theArgs[1] == NULL)
 			{
-				printf("No directory given")
+				printf("No directory given");
 			}
 			else
 			{
