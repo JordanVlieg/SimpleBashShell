@@ -33,14 +33,7 @@ int main ( void )
 		}
 		theArgs[counter] = NULL;
 
-		if(strcmp(theArgs[0], "pwd") == 0)
-		{
-			char theDirectory[100];
-			getcwd(theDirectory, 100);
-			printf("Printed by me: %s\n", theDirectory);
-		}
-
-		else if(strcmp(theArgs[0], "cd") == 0)
+		if(strcmp(theArgs[0], "cd") == 0)
 		{
 			printf("REACHED THE GODDAMN FUNCTION \n");
 			if(theArgs[1] == NULL)
