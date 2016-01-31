@@ -92,6 +92,11 @@ int main ( void )
 				{
 					wait(&waitStatus);
 				}
+				else
+				{
+					int returnedID = waitpid(-1, &waitStatus, WNOHANG);
+					printf("returned id is %d\n", returnedID);
+				}
 
 			}
 			free (cmd);
