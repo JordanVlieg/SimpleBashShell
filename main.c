@@ -16,6 +16,8 @@
 
 int main ( void )
 {
+	int bgList[] = [0, 0, 0, 0, 0];
+	char* bgNameList[5];
 	for (;;)
 	{
 		char* cmd = readline ("shell>");
@@ -26,6 +28,7 @@ int main ( void )
 		char* token;
 		token  = strtok(cmd, delimiter);
 		int counter;
+		int bgFlag = 0;
 		for(counter = 0; token != NULL && counter < ARGSLEN - 1; counter++)
 		{
 			theArgs[counter] = token;
@@ -33,6 +36,10 @@ int main ( void )
 		}
 		theArgs[counter] = NULL;
 
+		if(strcmp(theArgs[0], "bg") == 0)
+		{
+			bgFlag = 1;
+		}
 		if(strcmp(theArgs[0], "cd") == 0)
 		{
 			printf("REACHED THE GODDAMN FUNCTION \n");
@@ -53,36 +60,14 @@ int main ( void )
 				}
 			}
 		}
-		if(strcmp(theArgs[0], "bg") == 0)
-		{
-			int childpid = fork();
-			if(childpid == 0)
-			{
-				// This is the child thread
-				execvp(theArgs[1], theArgs);
-				exit(0);
-			}
-			else if(childpid == -1)
-			{
-				// Fork was unsuccessful
-				printf("Internal system error: Fork");
-				exit(0);
-			}
-			else
-			{
-				printf("reached the bg section");
-				// This is the parent thread
-				//wait(&waitStatus);
-			}
-			free (cmd);
-		}
 		else
 		{
 			int childpid = fork();
 			if(childpid == 0)
 			{
 				// This is the child thread
-				execvp(theArgs[0], theArgs);
+				execvp(theArgs[bgFlag], theArgs); //A very dirty dirty trick
+				printf("This is hit now");
 				exit(0);
 			}
 			else if(childpid == -1)
@@ -94,7 +79,20 @@ int main ( void )
 			else
 			{
 				// This is the parent thread
-				wait(&waitStatus);
+				int bgCounter = 0;
+				for(; bgCounter < 5; bgCounter++)
+				{
+					if(bgList[bgCounter] == 0)
+					{
+						bgList[bgCounter] = childpid;
+						bgNameList[bgCounter] = theArgs;
+					}
+				}
+				if(bgFlag == 0)
+				{
+					wait(&waitStatus);
+				}
+
 			}
 			free (cmd);
 		}
