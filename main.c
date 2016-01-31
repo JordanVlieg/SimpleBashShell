@@ -59,7 +59,7 @@ int main ( void )
 			if(childpid == 0)
 			{
 				// This is the child thread
-				execvp(theArgs[0], theArgs);
+				execvp(theArgs[1], theArgs);
 				exit(0);
 			}
 			else if(childpid == -1)
@@ -70,6 +70,7 @@ int main ( void )
 			}
 			else
 			{
+				printf("reached the bg section");
 				// This is the parent thread
 				//wait(&waitStatus);
 			}
