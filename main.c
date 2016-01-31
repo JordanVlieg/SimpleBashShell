@@ -96,7 +96,7 @@ int main ( void )
 				else
 				{
 					pid_t pid;
-					while((pid= waitpid(-1, &waitStatus, WNOHANG)) == 0)
+					while((pid= waitpid(-1, &waitStatus, WNOHANG)) > 0)
 					{
 						printf("process completed");	
 					}
