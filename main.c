@@ -112,7 +112,7 @@ int main ( void )
 void Delete_Children(void)
 {
 	pid_t pid;
-	int &waitStatus;
+	int waitStatus;
 	while((pid= waitpid(-1, &waitStatus, WNOHANG)) > 0)
 	{
 		printf("process completed");	
