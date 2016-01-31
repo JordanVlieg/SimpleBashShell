@@ -94,8 +94,12 @@ int main ( void )
 				}
 				else
 				{
-					int returnedID = waitpid(-1, &waitStatus, WNOHANG);
-					printf("returned id is %d\n", returnedID);
+					pid_t pid;
+					while((pid= waitpid(-1, &waitStatus, WNOHANG)) > 0)
+					{
+						printf("process completed");	
+					}
+					//printf("returned id is %d\n", returnedID);
 				}
 
 			}
