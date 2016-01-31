@@ -53,6 +53,28 @@ int main ( void )
 				}
 			}
 		}
+		if(strcmp(theArgs[0], "bg") == 0)
+		{
+			int childpid = fork();
+			if(childpid == 0)
+			{
+				// This is the child thread
+				execvp(theArgs[0], theArgs);
+				exit(0);
+			}
+			else if(childpid == -1)
+			{
+				// Fork was unsuccessful
+				printf("Internal system error: Fork");
+				exit(0);
+			}
+			else
+			{
+				// This is the parent thread
+				//wait(&waitStatus);
+			}
+			free (cmd);
+		}
 		else
 		{
 			int childpid = fork();

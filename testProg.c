@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void main (void)
+void main (void)
 {
 	while (1)
 	{
