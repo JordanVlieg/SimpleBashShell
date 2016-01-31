@@ -16,6 +16,7 @@
 
 int main ( void )
 {
+	void Delete_Children(void);
 	int bgList[] = {0, 0, 0, 0, 0};
 	//char* bgNameList[5];
 	for (;;)
@@ -68,13 +69,13 @@ int main ( void )
 				// This is the child thread
 				execvp(theArgs[bgFlag], theArgs); //A very dirty dirty trick
 				printf("This is hit now");
-				exit(0);
+				exit(EXIT_SUCCESS);
 			}
 			else if(childpid == -1)
 			{
 				// Fork was unsuccessful
 				printf("Internal system error: Fork");
-				exit(0);
+				exit(EXIT_FAILURE);
 			}
 			else
 			{
@@ -95,7 +96,7 @@ int main ( void )
 				else
 				{
 					pid_t pid;
-					while((pid= waitpid(-1, &waitStatus, WNOHANG)) > 0)
+					while((pid= waitpid(-1, &waitStatus, WNOHANG)) == 0)
 					{
 						printf("process completed");	
 					}
@@ -105,5 +106,15 @@ int main ( void )
 			}
 			free (cmd);
 		}
+	}
+}
+
+void Delete_Children(void)
+{
+	pid_t pid;
+	int &waitStatus
+	while((pid= waitpid(-1, &waitStatus, WNOHANG)) > 0)
+	{
+		printf("process completed");	
 	}
 }
