@@ -16,8 +16,8 @@
 
 int main ( void )
 {
-	int bgList[] = [0, 0, 0, 0, 0];
-	char* bgNameList[5];
+	int bgList[] = {0, 0, 0, 0, 0};
+	//char* bgNameList[5];
 	for (;;)
 	{
 		char* cmd = readline ("shell>");
@@ -85,7 +85,7 @@ int main ( void )
 					if(bgList[bgCounter] == 0)
 					{
 						bgList[bgCounter] = childpid;
-						bgNameList[bgCounter] = theArgs;
+						//bgNameList[bgCounter] = theArgs;
 					}
 				}
 				if(bgFlag == 0)
