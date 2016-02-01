@@ -14,6 +14,26 @@
 #define ARGSLEN		100
 
 
+void Exited_Process(int sig)
+{
+	pid_t pid;
+
+  	pid = wait(NULL);
+
+  	printf("Pid %d exited.\n", pid);
+}
+
+void Delete_Children(void)
+{
+	pid_t pid;
+	int waitStatus;
+	while((pid= waitpid(-1, &waitStatus, WNOHANG)) > 0)
+	{
+		printf("process completed");	
+	}
+}
+
+
 int main ( void )
 {
 	void Delete_Children(void);
@@ -63,7 +83,7 @@ int main ( void )
 		}
 		else
 		{
-			signal(SIGCHLD, handler);
+			signal(SIGCHLD, Exited_Process);
 			int childpid = fork();
 			if(childpid == 0)
 			{
@@ -110,21 +130,3 @@ int main ( void )
 	}
 }
 
-void Exited_Process(int sig)
-{
-	pid_t pid;
-
-  	pid = wait(NULL);
-
-  	printf("Pid %d exited.\n", pid);
-}
-
-void Delete_Children(void)
-{
-	pid_t pid;
-	int waitStatus;
-	while((pid= waitpid(-1, &waitStatus, WNOHANG)) > 0)
-	{
-		printf("process completed");	
-	}
-}
