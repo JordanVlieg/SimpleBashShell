@@ -228,8 +228,8 @@ int main ( void )
 						for(; bgCounter < 5; bgCounter++)
 						{
 							if(bgList[bgCounter].pid == -2)
-							{
-								printf("Added a process to the list: %s\n", cmd);							bgList[bgCounter].pid = childpid;
+							{						
+								bgList[bgCounter].pid = childpid;
 								strncpy(bgList[bgCounter].command, command, 1000);
 								break;
 							}
