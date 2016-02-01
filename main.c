@@ -69,7 +69,6 @@ int main ( void )
 
 			if(strcmp(theArgs[0], "bg") == 0)
 			{
-				printf("reached\n");
 				bgFlag = 1;
 			}
 
@@ -201,13 +200,11 @@ int main ( void )
 				memset(&theSig, 0, sizeof(theSig));
 				theSig.sa_handler = &Exited_Process;
 				sigaction(SIGCHLD, &theSig, NULL);
-				//sigaction(SIGCHLD, Exited_Process);
 				pid_t childpid = fork();
 				if(childpid == 0)
 				{
 					// This is the child thread
 					execvp(theArgs[bgFlag], theArgs); //A very dirty dirty trick
-					printf("This is hit now\nbg ");
 					exit(EXIT_SUCCESS);
 				}
 				else if(childpid == -1)
