@@ -22,11 +22,11 @@ struct Process
 
 void Exited_Process(int sig)
 {
-	pid_t pid;
+	//pid_t pid;
 
-  	pid = wait(NULL);
+  	//pid = wait(NULL);
 
-  	printf("Pid %d exited.\n", pid);
+  	//printf("Pid %d exited.\n", pid);
 }
 
 void Delete_Children(void)
@@ -48,7 +48,7 @@ int main ( void )
 	for(;item<5;item++)
 	{
 		bgList[item].pid = -2;
-		bgList[item].running = 'N';
+		bgList[item].running = 'R';
 	}
 
 	for (;;)
