@@ -207,7 +207,11 @@ int main ( void )
 			}
 			else
 			{
-				sigaction(SIGCHLD, Exited_Process);
+				struct sigaction theSig;
+				memset(&theSig, 0, sizeof(theSig));
+				theSig.sa_handler = &Exited_Process;
+				sigaction(SIGCHLD, &theSig, NULL)
+				//sigaction(SIGCHLD, Exited_Process);
 				pid_t childpid = fork();
 				if(childpid == 0)
 				{
