@@ -75,12 +75,15 @@ int main ( void )
 			if(strcmp(theArgs[bgFlag], "bglist") == 0)
 			{
 				int theJob = 0;
+				int numJobs = 0;
 				for(; theJob < 5; theJob++)
 				{
 					if(bgList[theJob].pid != -2)
 					{
 						printf("%d[%c]: %s\n", theJob, bgList[theJob].running, bgList[theJob].command);
+						numJobs++;
 					}
+					printf("Number of Jobs: %i", numJobs);
 				}
 			}
 			else if(strcmp(theArgs[bgFlag], "bgkill") == 0 || strcmp(theArgs[bgFlag], "start") == 0 || strcmp(theArgs[bgFlag], "stop") == 0)
