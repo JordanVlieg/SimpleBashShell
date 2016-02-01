@@ -66,7 +66,15 @@ int main ( void )
 		{
 			bgFlag = 1;
 		}
-		if(strcmp(theArgs[0], "cd") == 0)
+		else if(strcmp(theArgs[0], "bgList") == 0)
+		{
+			int theJob = 0;
+			for(; theJob < 5; theJob++)
+			{
+				printf("%d: %s", theJob, bgList[theJob].command);
+			}
+		}
+		else if(strcmp(theArgs[0], "cd") == 0)
 		{
 			printf("REACHED THE GODDAMN FUNCTION \n");
 			if(theArgs[1] == NULL)
@@ -112,7 +120,6 @@ int main ( void )
 					{
 						bgList[bgCounter].pid = childpid;
 						bgList[bgCounter].command = theArgs;
-						//bgNameList[bgCounter] = theArgs;
 					}
 				}
 				if(bgFlag == 0)
@@ -121,6 +128,7 @@ int main ( void )
 				}
 				else
 				{
+					printf("The child process ID is: %d", childpid);
 					signal(SIGCHLD, Exited_Process);
 				}
 
