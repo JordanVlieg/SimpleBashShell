@@ -86,7 +86,7 @@ int main ( void )
 				{
 					if(bgList[theJob].pid != -2)
 					{
-						printf("%d[%c]: %s\n", theJob, bgList[theJob].command, bgList[theJob].running);
+						printf("%d[%s]: %s\n", theJob, bgList[theJob].command, bgList[theJob].running);
 					}
 				}
 			}
