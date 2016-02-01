@@ -16,7 +16,7 @@
 struct Process 
 {
 	int pid;
-	char* command;
+	char command[1000];
 };
 
 void Exited_Process(int sig)
@@ -52,6 +52,8 @@ int main ( void )
 	for (;;)
 	{
 		char* cmd = readline ("shell>");
+		char command[1000];
+		strncpy(command, cmd, 1000);
 		printf ("Got: [%s]\n", cmd);
 		int waitStatus;
 		char* theArgs[ARGSLEN];
@@ -73,15 +75,24 @@ int main ( void )
 			bgFlag = 1;
 		}
 
-		if(strcmp(theArgs[0], "bgList") == 0)
+		if(strcmp(theArgs[bgFlag], "bglist") == 0)
 		{
 			int theJob = 0;
 			for(; theJob < 5; theJob++)
 			{
-				printf("%d: %s\n", theJob, bgList[theJob].command);
+				if(theArgs[1+bgFlag].pid != -2)
+				{
+					printf("%d: %s\n", theJob, bgList[theJob].command);
+				}
 			}
 		}
-		else if(strcmp(theArgs[0], "cd") == 0)
+		else if(strcmp(theArgs[bgFlag], "bgkill") == 0)
+		{
+			kill(bgList[theArgs[1+bgFlag]].pid, TERM);
+			printf("Killed process: %d\n", theArgs[1+bgFlag]);
+			bgList[theArgs[1+bgFlag]].pwd = -2;
+		}
+		else if(strcmp(theArgs[bgFlag], "cd") == 0)
 		{
 			if(theArgs[1] == NULL)
 			{
@@ -132,14 +143,14 @@ int main ( void )
 						if(bgList[bgCounter].pid == -2)
 						{
 							printf("Added a process to the list: %s\n", cmd);
-							int theArg = 0;
-							char theCommand[1000];
-							for(; theArg < ARGSLEN; theArg++)
-							{
-								strncpy(theCommand, theArgs[theArg]);
-							}
+							//int theArg = 0;
+							//char theCommand[1000];
+							//for(; theArg < ARGSLEN; theArg++)
+							//{
+							//	strncpy(theCommand, theArgs[theArg]);
+							//}
 							bgList[bgCounter].pid = childpid;
-							strncpy(bgList[bgCounter].command, theCommand, 1000);
+							strncpy(bgList[bgCounter].command, command, 1000);
 							break;
 						}
 						else
