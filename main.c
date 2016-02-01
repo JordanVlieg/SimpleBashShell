@@ -43,6 +43,11 @@ int main ( void )
 {
 	void Delete_Children(void);
 	struct Process bgList[5];
+	int item = 0;
+	for(;item<5;item++)
+	{
+		bgList[item].pid = -2;
+	}
 	//char* bgNameList[5];
 	for (;;)
 	{
@@ -124,8 +129,9 @@ int main ( void )
 					int bgCounter = 0;
 					for(; bgCounter < 5; bgCounter++)
 					{
-						if(bgList[bgCounter].pid == 0)
+						if(bgList[bgCounter].pid == -2)
 						{
+							printf("Added a process to the list\n");
 							bgList[bgCounter].pid = childpid;
 							bgList[bgCounter].command = cmd;
 						}
