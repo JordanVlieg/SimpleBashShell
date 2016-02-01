@@ -165,7 +165,8 @@ int main ( void )
 
 				if(bgFlag == 0)
 				{
-					waitpid(-1, &waitStatus, WNOHANG);
+					waitpid(childpid, &waitStatus, 0);
+					printf("child finished\n");
 				}
 				else
 				{
