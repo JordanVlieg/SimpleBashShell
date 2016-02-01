@@ -133,7 +133,7 @@ int main ( void )
 						{
 							printf("Added a process to the list: %s\n", cmd);
 							bgList[bgCounter].pid = childpid;
-							bgList[bgCounter].command = cmd;
+							strncpy(bgList[bgCounter].command, cmd, ARGSLEN);
 							break;
 						}
 						else
