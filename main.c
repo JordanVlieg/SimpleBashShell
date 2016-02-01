@@ -233,6 +233,7 @@ int main ( void )
 					}
 					else
 					{
+						waitpid(child_pid, &status, WNOHANG);
 						int bgCounter = 0;
 						for(; bgCounter < 5; bgCounter++)
 						{
@@ -249,7 +250,6 @@ int main ( void )
 						}
 						printf("The child process ID is: %d\n", childpid);
 					}
-
 				}
 				free (cmd);
 			}
