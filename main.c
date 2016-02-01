@@ -22,11 +22,15 @@ struct Process
 
 void Exited_Process(int sig)
 {
-	//pid_t pid;
 
-  	//pid = wait(NULL);
+	pid_t pid;
 
-  	//printf("Pid %d exited.\n", pid);
+	pid = wait(NULL);
+
+	if(pid!=-1){
+		int newPid = get_local_pid(pid);
+		printf("Pid %d exited.\n", newPid);
+	}
 }
 
 void Delete_Children(void)
