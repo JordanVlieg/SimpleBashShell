@@ -89,23 +89,33 @@ int main ( void )
 		else if(strcmp(theArgs[bgFlag], "bgkill") == 0)
 		{
 			int process;
-			int switcher = theArgs[1+bgFlag][0] - 48;
-			switch(switcher)
+			char switcher = theArgs[1+bgFlag][0];
+			if(switcher == '0')
 			{
-				case '0':
-					process = 0;
-				case '1':
-					process = 1;
-				case '2':
-					process = 2;
-				case '3':
-					process = 3;
-				case '4':
-					process = 4;
-				default:
-					process = -1;
-					printf("Invalid process number\n");
-			}	
+				process = 0;
+			}
+			else if(switcher == '1')
+			{
+				process = 1;
+			}
+			else if(switcher == '2')
+			{
+				process = 2;
+			}
+			else if(switcher == '3')
+			{
+				process = 3;
+			}
+			else if(switcher == '4')
+			{
+				process = 4;
+			}
+			else
+			{
+				process = -1;
+				printf("Invalid process number %d\n", switcher);
+			}
+
 			if(process >= 0)
 			{
 				kill(bgList[process].pid, SIGTERM);
