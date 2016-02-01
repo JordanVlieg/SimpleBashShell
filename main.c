@@ -83,7 +83,6 @@ int main ( void )
 		}
 		else
 		{
-			signal(SIGCHLD, Exited_Process);
 			int childpid = fork();
 			if(childpid == 0)
 			{
@@ -116,6 +115,7 @@ int main ( void )
 				}
 				else
 				{
+					signal(SIGCHLD, Exited_Process);
 					pid_t pid;
 					while((pid= waitpid(-1, &waitStatus, WNOHANG)) > 0)
 					{
