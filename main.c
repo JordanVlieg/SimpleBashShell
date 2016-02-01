@@ -145,7 +145,7 @@ int main ( void )
 		}
 		else
 		{
-			int childpid = fork();
+			pid_t childpid = fork();
 			if(childpid == 0)
 			{
 				// This is the child thread
