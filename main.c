@@ -80,7 +80,7 @@ int main ( void )
 			int theJob = 0;
 			for(; theJob < 5; theJob++)
 			{
-				if(theArgs[1+bgFlag].pid != -2)
+				if(bgList[theJob].pid != -2)
 				{
 					printf("%d: %s\n", theJob, bgList[theJob].command);
 				}
@@ -89,7 +89,7 @@ int main ( void )
 		else if(strcmp(theArgs[bgFlag], "bgkill") == 0)
 		{
 			int process;
-			int switcher = theArgs[1+bgFlag][0];
+			int switcher = theArgs[1+bgFlag][0] - 48;
 			switch(switcher)
 			{
 				case '0':
