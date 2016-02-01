@@ -42,7 +42,7 @@ void Delete_Children(void)
 int main ( void )
 {
 	void Delete_Children(void);
-	Process bgList[5];
+	struct Process bgList[5];
 	//char* bgNameList[5];
 	for (;;)
 	{
