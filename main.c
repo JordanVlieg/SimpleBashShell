@@ -13,6 +13,11 @@
 #include <sys/wait.h>
 #define ARGSLEN		100
 
+struct Process 
+{
+	int pid;
+	char command[ARGSLEN];
+}
 
 void Exited_Process(int sig)
 {
@@ -37,7 +42,7 @@ void Delete_Children(void)
 int main ( void )
 {
 	void Delete_Children(void);
-	int bgList[] = {0, 0, 0, 0, 0};
+	Process bgList[5];
 	//char* bgNameList[5];
 	for (;;)
 	{
@@ -105,7 +110,8 @@ int main ( void )
 				{
 					if(bgList[bgCounter] == 0)
 					{
-						bgList[bgCounter] = childpid;
+						bgList[bgCounter].pid = childpid;
+						bgList[bgCounter].command = theArgs;
 						//bgNameList[bgCounter] = theArgs;
 					}
 				}
@@ -116,12 +122,6 @@ int main ( void )
 				else
 				{
 					signal(SIGCHLD, Exited_Process);
-					//pid_t pid;
-					//while((pid= waitpid(-1, &waitStatus, WNOHANG)) > 0)
-					//{
-					//	printf("process completed");	
-					//}
-					//printf("returned id is %d\n", returnedID);
 				}
 
 			}
