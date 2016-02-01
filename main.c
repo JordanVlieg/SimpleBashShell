@@ -114,25 +114,26 @@ int main ( void )
 			else
 			{
 				// This is the parent thread
-				int bgCounter = 0;
-				for(; bgCounter < 5; bgCounter++)
-				{
-					if(bgList[bgCounter].pid != NULL)
-					{
-						bgList[bgCounter].pid = childpid;
-						bgList[bgCounter].command = cmd;
-					}
-					else
-					{
-						printf("PID is:\n", bgList[bgCount].pid);
-					}
-				}
+
 				if(bgFlag == 0)
 				{
 					wait(&waitStatus);
 				}
 				else
 				{
+					int bgCounter = 0;
+					for(; bgCounter < 5; bgCounter++)
+					{
+						if(bgList[bgCounter].pid == 0)
+						{
+							bgList[bgCounter].pid = childpid;
+							bgList[bgCounter].command = cmd;
+						}
+						else
+						{
+							printf("PID is: %d\n", bgList[bgCounter].pid);
+						}
+					}
 					printf("The child process ID is: %d\n", childpid);
 					signal(SIGCHLD, Exited_Process);
 				}
