@@ -73,7 +73,7 @@ int main ( void )
 			int theJob = 0;
 			for(; theJob < 5; theJob++)
 			{
-				printf("%d: %s", theJob, bgList[theJob].command);
+				printf("%d: %s\n", theJob, bgList[theJob].command);
 			}
 		}
 		else if(strcmp(theArgs[0], "cd") == 0)
@@ -117,10 +117,14 @@ int main ( void )
 				int bgCounter = 0;
 				for(; bgCounter < 5; bgCounter++)
 				{
-					if(bgList[bgCounter].pid == 0)
+					if(bgList[bgCounter].pid != NULL)
 					{
 						bgList[bgCounter].pid = childpid;
 						bgList[bgCounter].command = cmd;
+					}
+					else
+					{
+						printf("PID is:\n", bgList[bgCount].pid);
 					}
 				}
 				if(bgFlag == 0)
