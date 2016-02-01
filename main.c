@@ -116,11 +116,11 @@ int main ( void )
 				else
 				{
 					signal(SIGCHLD, Exited_Process);
-					pid_t pid;
-					while((pid= waitpid(-1, &waitStatus, WNOHANG)) > 0)
-					{
-						printf("process completed");	
-					}
+					//pid_t pid;
+					//while((pid= waitpid(-1, &waitStatus, WNOHANG)) > 0)
+					//{
+					//	printf("process completed");	
+					//}
 					//printf("returned id is %d\n", returnedID);
 				}
 
