@@ -22,7 +22,7 @@ struct Process
 
 void Exited_Process(int sig)
 {
-	/*
+	
 	pid_t pid;
 
 	pid = wait(NULL);
@@ -31,7 +31,7 @@ void Exited_Process(int sig)
 	{
 		printf("Pid %d exited.\n", pid);
 	}
-	*/
+	
 }
 
 int main ( void )
@@ -84,7 +84,7 @@ int main ( void )
 						numJobs++;
 					}
 				}
-				printf("Number of Jobs: %i", numJobs);
+				printf("Number of Jobs: %i\n", numJobs);
 			}
 
 			else if(strcmp(theArgs[bgFlag], "bgkill") == 0 || strcmp(theArgs[bgFlag], "start") == 0 || strcmp(theArgs[bgFlag], "stop") == 0)
@@ -208,7 +208,9 @@ int main ( void )
 				if(childpid == 0)
 				{
 					// This is the child thread
-					execvp(theArgs[bgFlag], theArgs); //A very dirty dirty trick
+					char *env[] = {NULL};
+					execve(theArgs[bgFlag], theArgs, env); //A very dirty dirty trick
+					//execve(theArgs[bgFlag], theArgs); 
 					exit(EXIT_SUCCESS);
 				}
 				else if(childpid == -1)
