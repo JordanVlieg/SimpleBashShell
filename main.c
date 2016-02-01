@@ -89,17 +89,18 @@ int main ( void )
 		else if(strcmp(theArgs[bgFlag], "bgkill") == 0)
 		{
 			int process;
-			switch(theArgs[1+bgFlag])
+			int switcher = theArgs[1+bgFlag][0];
+			switch(switcher)
 			{
-				case "0":
+				case '0':
 					process = 0;
-				case "1":
+				case '1':
 					process = 1;
-				case "2":
+				case '2':
 					process = 2;
-				case "3":
+				case '3':
 					process = 3;
-				case "4":
+				case '4':
 					process = 4;
 				default:
 					process = -1;
@@ -108,8 +109,8 @@ int main ( void )
 			if(process >= 0)
 			{
 				kill(bgList[process].pid, TERM);
-				printf("Killed process: %d\n", theArgs[1+bgFlag]);
-				bgList[theArgs[1+bgFlag]].pwd = -2;
+				printf("Killed process: %d\n", process);
+				bgList[process].pwd = -2;
 			}
 			
 		}
