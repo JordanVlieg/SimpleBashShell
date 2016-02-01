@@ -48,6 +48,7 @@ int main ( void )
 	for(;item<5;item++)
 	{
 		bgList[item].pid = -2;
+		bgList[item].running = 'N';
 	}
 
 	for (;;)
@@ -85,7 +86,7 @@ int main ( void )
 				{
 					if(bgList[theJob].pid != -2)
 					{
-						printf("%d: %s\n", theJob, bgList[theJob].command);
+						printf("%d[%c]: %s\n", theJob, bgList[theJob].command, bgList[theJob].running);
 					}
 				}
 			}
@@ -130,11 +131,13 @@ int main ( void )
 					else if(strcmp(theArgs[bgFlag], "start") == 0)
 					{
 						kill(bgList[process].pid, SIGCONT);
+						bgList[process].running = 'R';
 						printf("Started process: %d\n", process);
 					}
 					else if(strcmp(theArgs[bgFlag], "stop") == 0)
 					{
 						kill(bgList[process].pid, SIGSTOP);
+						bgList[process].running = 'S';
 						printf("Stopped process: %d\n", process);
 					}
 
