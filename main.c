@@ -207,7 +207,7 @@ int main ( void )
 			}
 			else
 			{
-				signal(SIGCHLD, Exited_Process);
+				sigaction(SIGCHLD, Exited_Process);
 				pid_t childpid = fork();
 				if(childpid == 0)
 				{
