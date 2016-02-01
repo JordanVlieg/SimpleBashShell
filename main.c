@@ -64,9 +64,11 @@ int main ( void )
 
 		if(strcmp(theArgs[0], "bg") == 0)
 		{
+			printf("reached\n");
 			bgFlag = 1;
 		}
-		else if(strcmp(theArgs[0], "bgList") == 0)
+		
+		if(strcmp(theArgs[0], "bgList") == 0)
 		{
 			int theJob = 0;
 			for(; theJob < 5; theJob++)
@@ -76,7 +78,6 @@ int main ( void )
 		}
 		else if(strcmp(theArgs[0], "cd") == 0)
 		{
-			printf("REACHED THE GODDAMN FUNCTION \n");
 			if(theArgs[1] == NULL)
 			{
 				printf("No directory given\n");
