@@ -108,9 +108,9 @@ int main ( void )
 			}	
 			if(process >= 0)
 			{
-				kill(bgList[process].pid, TERM);
+				kill(bgList[process].pid, SIGTERM);
 				printf("Killed process: %d\n", process);
-				bgList[process].pwd = -2;
+				bgList[process].pid = -2;
 			}
 			
 		}
