@@ -207,6 +207,7 @@ int main ( void )
 			}
 			else
 			{
+				signal(SIGCHLD, Exited_Process);
 				pid_t childpid = fork();
 				if(childpid == 0)
 				{
@@ -247,7 +248,6 @@ int main ( void )
 							}
 						}
 						printf("The child process ID is: %d\n", childpid);
-						signal(SIGCHLD, Exited_Process);
 					}
 
 				}
