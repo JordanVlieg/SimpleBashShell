@@ -220,7 +220,6 @@ int main ( void )
 					if(bgFlag == 0)
 					{
 						waitpid(childpid, &waitStatus, 0);
-						printf("child finished\n");
 					}
 					else
 					{
@@ -234,12 +233,7 @@ int main ( void )
 								strncpy(bgList[bgCounter].command, command, 1000);
 								break;
 							}
-							else
-							{
-								printf("PID is: %d\n", bgList[bgCounter].pid);
-							}
 						}
-						printf("The child process ID is: %d\n", childpid);
 					}
 				}
 				free (cmd);
