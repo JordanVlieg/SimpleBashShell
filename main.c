@@ -27,9 +27,9 @@ void Exited_Process(int sig)
 
 	pid = wait(NULL);
 
-	if(pid!=-1){
-		int newPid = get_local_pid(pid);
-		printf("Pid %d exited.\n", newPid);
+	if(pid!=-1)
+	{
+		printf("Pid %d exited.\n", pid);
 	}
 }
 
