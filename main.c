@@ -132,8 +132,14 @@ int main ( void )
 						if(bgList[bgCounter].pid == -2)
 						{
 							printf("Added a process to the list: %s\n", cmd);
+							int theArg = 0;
+							char theCommand[1000];
+							for(; theArg < ARGSLEN; theArg++)
+							{
+								strncpy(theCommand, theArgs[theArg]);
+							}
 							bgList[bgCounter].pid = childpid;
-							strncpy(bgList[bgCounter].command, cmd, ARGSLEN);
+							strncpy(bgList[bgCounter].command, theCommand, 1000);
 							break;
 						}
 						else
