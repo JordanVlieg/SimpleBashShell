@@ -22,6 +22,7 @@ struct Process
 
 void Exited_Process(int sig)
 {
+	/*
 	pid_t pid;
 
 	pid = wait(NULL);
@@ -30,18 +31,8 @@ void Exited_Process(int sig)
 	{
 		printf("Pid %d exited.\n", pid);
 	}
+	*/
 }
-
-void Delete_Children(void)
-{
-	pid_t pid;
-	int waitStatus;
-	while((pid= waitpid(-1, &waitStatus, WNOHANG)) > 0)
-	{
-		printf("process completed");	
-	}
-}
-
 
 int main ( void )
 {
