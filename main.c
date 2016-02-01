@@ -22,7 +22,7 @@ struct Process
 
 void Exited_Process(int sig)
 {
-	
+	/*
 	pid_t pid;
 
 	pid = wait(NULL);
@@ -31,6 +31,7 @@ void Exited_Process(int sig)
 	{
 		printf("Pid %d exited.\n", pid);
 	}
+	*/
 }
 
 int main ( void )
