@@ -63,6 +63,7 @@ int main ( void )
 		}
 		else
 		{
+			signal(SIGCHLD, handler);
 			int childpid = fork();
 			if(childpid == 0)
 			{
@@ -107,6 +108,15 @@ int main ( void )
 			free (cmd);
 		}
 	}
+}
+
+void Exited_Process(int sig)
+{
+	pid_t pid;
+
+  	pid = wait(NULL);
+
+  	printf("Pid %d exited.\n", pid);
 }
 
 void Delete_Children(void)
