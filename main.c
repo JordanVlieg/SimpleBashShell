@@ -16,7 +16,7 @@
 struct Process 
 {
 	int pid;
-	char command[ARGSLEN];
+	char* command;
 };
 
 void Exited_Process(int sig)
@@ -119,7 +119,7 @@ int main ( void )
 					if(bgList[bgCounter].pid == 0)
 					{
 						bgList[bgCounter].pid = childpid;
-						bgList[bgCounter].command = theArgs;
+						bgList[bgCounter].command = cmd;
 					}
 				}
 				if(bgFlag == 0)
