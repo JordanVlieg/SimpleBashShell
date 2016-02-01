@@ -16,7 +16,7 @@
 struct Process 
 {
 	int pid;
-	char* command;
+	char command[ARGSLEN];
 };
 
 void Exited_Process(int sig)
@@ -48,6 +48,8 @@ int main ( void )
 	{
 		char* cmd = readline ("shell>");
 		printf ("Got: [%s]\n", cmd);
+		char input[ARGSLEN];
+		input = cmd;
 		int waitStatus;
 		char* theArgs[ARGSLEN];
 		const char delimiter[2] = " ";
@@ -67,7 +69,7 @@ int main ( void )
 			printf("reached\n");
 			bgFlag = 1;
 		}
-		
+
 		if(strcmp(theArgs[0], "bgList") == 0)
 		{
 			int theJob = 0;
@@ -102,13 +104,13 @@ int main ( void )
 			{
 				// This is the child thread
 				execvp(theArgs[bgFlag], theArgs); //A very dirty dirty trick
-				printf("This is hit now");
+				printf("This is hit now\nbg ");
 				exit(EXIT_SUCCESS);
 			}
 			else if(childpid == -1)
 			{
 				// Fork was unsuccessful
-				printf("Internal system error: Fork");
+				printf("Internal system error: Fork\n");
 				exit(EXIT_FAILURE);
 			}
 			else
@@ -120,7 +122,7 @@ int main ( void )
 					if(bgList[bgCounter].pid == 0)
 					{
 						bgList[bgCounter].pid = childpid;
-						bgList[bgCounter].command = cmd;
+						bgList[bgCounter].command = input;
 					}
 				}
 				if(bgFlag == 0)
@@ -129,7 +131,7 @@ int main ( void )
 				}
 				else
 				{
-					printf("The child process ID is: %d", childpid);
+					printf("The child process ID is: %d\n", childpid);
 					signal(SIGCHLD, Exited_Process);
 				}
 
