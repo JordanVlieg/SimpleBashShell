@@ -165,7 +165,7 @@ int main ( void )
 
 				if(bgFlag == 0)
 				{
-					wait(&waitStatus);
+					waitpid(-1, &waitStatus, WNOHANG);
 				}
 				else
 				{
@@ -174,14 +174,7 @@ int main ( void )
 					{
 						if(bgList[bgCounter].pid == -2)
 						{
-							printf("Added a process to the list: %s\n", cmd);
-							//int theArg = 0;
-							//char theCommand[1000];
-							//for(; theArg < ARGSLEN; theArg++)
-							//{
-							//	strncpy(theCommand, theArgs[theArg]);
-							//}
-							bgList[bgCounter].pid = childpid;
+							printf("Added a process to the list: %s\n", cmd);							bgList[bgCounter].pid = childpid;
 							strncpy(bgList[bgCounter].command, command, 1000);
 							break;
 						}
