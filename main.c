@@ -22,7 +22,6 @@ struct Process
 
 void Exited_Process(int sig)
 {
-	/*
 	pid_t pid;
 
 	pid = wait(NULL);
@@ -31,8 +30,18 @@ void Exited_Process(int sig)
 	{
 		printf("Pid %d exited.\n", pid);
 	}
-	*/
 }
+
+void Delete_Children(void)
+{
+	pid_t pid;
+	int waitStatus;
+	while((pid= waitpid(-1, &waitStatus, WNOHANG)) > 0)
+	{
+		printf("process completed");	
+	}
+}
+
 
 int main ( void )
 {
@@ -69,6 +78,7 @@ int main ( void )
 
 			if(strcmp(theArgs[0], "bg") == 0)
 			{
+				printf("reached\n");
 				bgFlag = 1;
 			}
 
@@ -200,6 +210,7 @@ int main ( void )
 				memset(&theSig, 0, sizeof(theSig));
 				theSig.sa_handler = &Exited_Process;
 				sigaction(SIGCHLD, &theSig, NULL);
+				//sigaction(SIGCHLD, Exited_Process);
 				pid_t childpid = fork();
 				if(childpid == 0)
 				{
@@ -221,18 +232,26 @@ int main ( void )
 					if(bgFlag == 0)
 					{
 						waitpid(childpid, &waitStatus, 0);
+						printf("child finished\n");
 					}
 					else
 					{
+						waitpid(childpid, &waitStatus, WNOHANG);
 						int bgCounter = 0;
 						for(; bgCounter < 5; bgCounter++)
 						{
 							if(bgList[bgCounter].pid == -2)
 							{
+								printf("Added a process to the list: %s\n", cmd);							bgList[bgCounter].pid = childpid;
 								strncpy(bgList[bgCounter].command, command, 1000);
 								break;
 							}
+							else
+							{
+								printf("PID is: %d\n", bgList[bgCounter].pid);
+							}
 						}
+						printf("The child process ID is: %d\n", childpid);
 					}
 				}
 				free (cmd);
