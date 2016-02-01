@@ -233,7 +233,7 @@ int main ( void )
 					}
 					else
 					{
-						waitpid(child_pid, &waitStatus, WNOHANG);
+						waitpid(childpid, &waitStatus, WNOHANG);
 						int bgCounter = 0;
 						for(; bgCounter < 5; bgCounter++)
 						{
