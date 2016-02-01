@@ -88,9 +88,30 @@ int main ( void )
 		}
 		else if(strcmp(theArgs[bgFlag], "bgkill") == 0)
 		{
-			kill(bgList[theArgs[1+bgFlag]].pid, TERM);
-			printf("Killed process: %d\n", theArgs[1+bgFlag]);
-			bgList[theArgs[1+bgFlag]].pwd = -2;
+			int process;
+			switch(theArgs[1+bgFlag])
+			{
+				case "0":
+					process = 0;
+				case "1":
+					process = 1;
+				case "2":
+					process = 2;
+				case "3":
+					process = 3;
+				case "4":
+					process = 4;
+				default:
+					process = -1;
+					printf("Invalid process number\n");
+			}	
+			if(process >= 0)
+			{
+				kill(bgList[process].pid, TERM);
+				printf("Killed process: %d\n", theArgs[1+bgFlag]);
+				bgList[theArgs[1+bgFlag]].pwd = -2;
+			}
+			
 		}
 		else if(strcmp(theArgs[bgFlag], "cd") == 0)
 		{
