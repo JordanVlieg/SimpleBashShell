@@ -4,9 +4,10 @@
 
 void main (void)
 {
-	while (1)
+	int counter = 0;
+	for(;counter<5;counter++)
 	{
 		printf("Completed a loop\n");
-		sleep (10);
+		sleep (2);
 	}
 }
