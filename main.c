@@ -31,7 +31,6 @@ void Exited_Process(int sig)
 	{
 		printf("Pid %d exited.\n", pid);
 	}
-	
 }
 
 int main ( void )
@@ -208,16 +207,14 @@ int main ( void )
 				if(childpid == 0)
 				{
 					// This is the child thread
-					char *env[] = {NULL};
-					execve(theArgs[bgFlag], theArgs, env); //A very dirty dirty trick
-					//execve(theArgs[bgFlag], theArgs); 
-					exit(EXIT_SUCCESS);
+					execvp(theArgs[bgFlag], theArgs); //A very dirty dirty trick
+					exit(0);
 				}
 				else if(childpid == -1)
 				{
 					// Fork was unsuccessful
 					printf("Internal system error: Fork\n");
-					exit(EXIT_FAILURE);
+					exit(0);
 				}
 				else
 				{
