@@ -17,7 +17,7 @@ struct Process
 {
 	int pid;
 	char command[ARGSLEN];
-}
+};
 
 void Exited_Process(int sig)
 {
@@ -108,7 +108,7 @@ int main ( void )
 				int bgCounter = 0;
 				for(; bgCounter < 5; bgCounter++)
 				{
-					if(bgList[bgCounter] == 0)
+					if(bgList[bgCounter].pid == 0)
 					{
 						bgList[bgCounter].pid = childpid;
 						bgList[bgCounter].command = theArgs;
